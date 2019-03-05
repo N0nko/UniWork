@@ -91,4 +91,5 @@ smallestArea = area;
 }
 }
 cout << smallestArea;
+system ("pause");
 }
