@@ -8,7 +8,11 @@
             "name": "a.exe",
             "type": "cppdbg",
             "request": "launch",
+<<<<<<< HEAD
             "program": "C:\\Users\\Matas\\Desktop\\Projects\\main.exe",
+=======
+            "program": "H:\\Projects\\UniWork\\main.exe",
+>>>>>>> bc52cacd8b8d22d27b6ce7c30d736cd30959a30d
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
