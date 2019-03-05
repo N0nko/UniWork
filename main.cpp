@@ -4,7 +4,7 @@
 #include <iomanip>
 
 using namespace std;
-omg random text
+
 class Vertex {
 private:
 long long x, y;
