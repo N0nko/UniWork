@@ -90,6 +90,6 @@ smallestArea = area;
 }
 }
 }
-cout << smallestArea;
-system ("pause");
+cout << smallestArea << endl;
+return 0;
 }
