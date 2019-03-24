@@ -31,7 +31,7 @@ class Triangle
     double getArea()
     {
         double p = (ab + bc + ca) / 2;
-        return sqrt(p * (p - ab) * (p - bc) * (p - ca));
+        return sqrt(p*(p - ab)*(p - bc)*(p - ca));
     }
 };
 
@@ -46,8 +46,8 @@ class Vertices
         double ab = a->getDistance(b);
         double bc = b->getDistance(c);
         double ca = c->getDistance(a);
-
-        return (ab + bc > ca) || (ab + ca > bc) || (ca + bc > ab);
+        
+     return (ab + bc > ca) || (ab + ca > bc) || (ca + bc > ab);
     }
 
     Triangle *newTriangle()
@@ -93,7 +93,7 @@ int main()
         newVertices->setC();
         vertices.push_back(newVertices);
     }
-    double smallestArea = INFINITY;
+    double totalArea = 0;
 
     for (Vertices *vert : vertices)
     {
@@ -101,12 +101,12 @@ int main()
         {
             Triangle *triangle = vert->newTriangle();
             double area = triangle->getArea();
-            if (area < smallestArea)
+            if (area > 0)
             {
-                smallestArea = area;
+                totalArea += area;
             }
         }
     }
-    cout << smallestArea << endl;
+    cout << totalArea << endl;
     return 0;
 }

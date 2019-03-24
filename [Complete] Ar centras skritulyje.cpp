@@ -5,19 +5,23 @@
 #include <fstream>
 using namespace std;
 
-class circleData {
-public:
+class circleData
+{
+  public:
 	int x, y, d;
 };
 
-class circleResult {
-public:
+class circleResult
+{
+  public:
 	int circleCount;
 };
 
-class circleUtil {
-public:
-	circleResult CirRes(circleData newCircle, circleResult newRes) {
+class circleUtil
+{
+  public:
+	circleResult CirRes(circleData newCircle, circleResult newRes)
+	{
 		double x = newCircle.x;
 		double y = newCircle.y;
 		double d = newCircle.d;
@@ -30,7 +34,6 @@ public:
 
 		return newRes;
 	}
-
 };
 int main()
 {

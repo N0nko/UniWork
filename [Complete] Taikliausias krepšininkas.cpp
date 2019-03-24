@@ -5,29 +5,33 @@
 #include <fstream>
 using namespace std;
 
-class throws {
-public:
+class throws
+{
+  public:
 	int OnePointThrows, OnePointScores;
 	int TwoPointThrows, TwoPointScores;
 	int ThreePointThrows, ThreePointScores;
 };
 
-class highScore {
-public:
+class highScore
+{
+  public:
 	double ratio;
-		int score;
-
+	int score;
 };
 
-class throwsUtil {
-public:
-	highScore throwCalc(throws data, highScore result) {
+class throwsUtil
+{
+  public:
+	highScore throwCalc(throws data, highScore result)
+	{
 
 		double _scores = data.OnePointScores + data.TwoPointScores + data.ThreePointScores;
 		double _throws = data.OnePointThrows + data.TwoPointThrows + data.ThreePointThrows;
 		double _ratio = _scores / _throws;
 		int _score = data.OnePointScores + data.TwoPointScores * 2 + data.ThreePointScores * 3;
-		if (_ratio > result.ratio) {
+		if (_ratio > result.ratio)
+		{
 			result.score = _score;
 			result.ratio = _ratio;
 		}
