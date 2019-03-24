@@ -15,6 +15,7 @@ double getDistance(Vertex* anotherVertex) {
     double distance = sqrt(pow(x-anotherVertex->x,2)+ pow(x-anotherVertex->x,2));
 return distance;
 }
+
 };
 
 class Triangle {
