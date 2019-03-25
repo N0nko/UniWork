@@ -13,11 +13,13 @@ class Time
     long long hh, mm, ss;
 
   public:
-  // Tarp n duotų laikų, raskite du laikus, kurių suma būtų didžiausia.
+    // Tarp n duotų laikų, raskite du laikus, kurių suma būtų didžiausia.
     double getTSum(Time *anotherTime)
     {
-        double timeDifference = (hh * 3600 + mm * 60 + ss) + (anotherTime->hh * 3600 + anotherTime->mm * 60 + anotherTime->ss);
-        return timeDifference;
+        double timeSum = (hh * 3600 + mm * 60 + ss) + (anotherTime->hh * 3600 + anotherTime->mm * 60 + anotherTime->ss);
+        if (timeSum > 24 * 3600)
+            timeSum = abs(24 * 3600 - timeSum);
+        return timeSum;
     }
 
     void setTime()
@@ -35,14 +37,15 @@ class Comparator
         double biggestSum = -INFINITY;
         double buffer;
         for (Time *each : times)
-        {
-            for (Time *anotherTime : times)
+            for (Time *anotherEach : times)
             {
-                buffer = each->getTSum(anotherTime);
-                if (buffer > biggestSum)
-                    biggestSum = buffer;
+                if (each != anotherEach)
+                {
+                    buffer = each->getTSum(anotherEach);
+                    if (buffer > biggestSum)
+                        biggestSum = buffer;
+                }
             }
-        }
         return biggestSum;
     }
 };
@@ -50,7 +53,7 @@ class Printer
 {
 
   public:
-  //Išvesti didžiausią galimą suminį laiką formatu: h:min:s
+    //Išvesti didžiausią galimą suminį laiką formatu: h:min:s
     void printResult(double seconds)
     {
 
@@ -74,7 +77,6 @@ int main()
         times.push_back(newTime);
     }
     Printer printer;
-
     Comparator compareDiff;
     printer.printResult(compareDiff.getBiggestSum(times));
     return 0;

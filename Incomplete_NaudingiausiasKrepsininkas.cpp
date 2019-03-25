@@ -14,7 +14,7 @@ class Throws
     int ThreePointThrows, ThreePointScores;
 
   public:
-  //Žemiau pateikti dvitaškių (metė, pataikė), tritaškių (metė, pataikė) bei baudų metimų (metė, pataikė) skaičia
+    //Žemiau pateikti dvitaškių (metė, pataikė), tritaškių (metė, pataikė) bei baudų metimų (metė, pataikė) skaičia
     void setScores()
     {
         cin >>
@@ -35,8 +35,9 @@ class ContributionComparer
   public:
     double getMostUsefulValue(vector<Throws *> throws, int n)
     {
-        double index, highestValue = -INFINITY;
-        for (double i = 0; i < n; i++)
+        int index;
+        double highestValue = -INFINITY;
+        for (int i = 0; i < n; i++)
         {
             double contributionValue = throws[i]->getContribution();
 

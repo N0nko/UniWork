@@ -15,7 +15,7 @@ class Vertex
 
     double getDistance(Vertex *anotherVertex)
     {
-        double distance = sqrt(pow(x - anotherVertex->x, 2) + pow(x - anotherVertex->x, 2));
+        double distance = sqrt(pow(x - anotherVertex->x, 2) + pow(y - anotherVertex->y, 2));
         return distance;
     }
 };
@@ -31,7 +31,8 @@ class Triangle
     double getArea()
     {
         double p = (ab + bc + ca) / 2;
-        return sqrt(p * (p - ab) * (p - bc) * (p - ca));
+        double area = sqrt(p * (p - ab) * (p - bc) * (p - ca));
+        return area;
     }
 };
 
@@ -47,7 +48,7 @@ class Vertices
         double bc = b->getDistance(c);
         double ca = c->getDistance(a);
 
-        return (ab + bc > ca) || (ab + ca > bc) || (ca + bc > ab);
+        return ((ab + bc > ca) && (ab + ca > bc) && (ca + bc > ab));
     }
 
     Triangle *newTriangle()
@@ -83,7 +84,6 @@ int main()
 {
     int n = 0;
     cin >> n;
-
     list<Vertices *> vertices;
     for (int i = 0; i < n; i++)
     {
@@ -94,11 +94,12 @@ int main()
         vertices.push_back(newVertices);
     }
     double smallestArea = INFINITY;
-
+    bool triangleExists= false;
     for (Vertices *vert : vertices)
     {
         if (vert->existTriangle())
         {
+            triangleExists = true;
             Triangle *triangle = vert->newTriangle();
             double area = triangle->getArea();
             if (area < smallestArea)
@@ -107,6 +108,10 @@ int main()
             }
         }
     }
-    cout << smallestArea << endl;
+    if (triangleExists)
+        cout << fixed << setprecision(2) << smallestArea << endl;
+    else
+        cout << "NO";
+
     return 0;
 }

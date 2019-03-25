@@ -8,10 +8,10 @@ using namespace std;
 class Vertex
 {
   private:
-    long long x, y;
+    int x, y;
 
   public:
-    Vertex(long x, long y) : x(x), y(y) {}
+    Vertex(int x, int y) : x(x), y(y) {}
 
     double getDistance(Vertex *anotherVertex)
     {
@@ -32,7 +32,6 @@ class Triangle
     {
         double p = (ab + bc + ca) / 2;
         double area = sqrt(p * (p - ab) * (p - bc) * (p - ca));
-        // cout << ab << bc << ca << endl;
         return area;
     }
 };
@@ -41,43 +40,31 @@ class Vertices
 {
   private:
     Vertex *a, *b, *c;
+    double ab, bc, ca;
 
   public:
     bool existTriangle()
     {
-        double ab = a->getDistance(b);
-        double bc = b->getDistance(c);
-        double ca = c->getDistance(a);
+        ab = a->getDistance(b);
+        bc = b->getDistance(c);
+        ca = c->getDistance(a);
 
-        return (ab + bc > ca) || (ab + ca > bc) || (ca + bc > ab);
+        return ((ab + bc > ca) && (ab + ca > bc) && (ca + bc > ab));
     }
 
     Triangle *newTriangle()
     {
-        double ab = a->getDistance(b);
-        double bc = b->getDistance(c);
-        double ca = c->getDistance(a);
-
         return new Triangle(ab, bc, ca);
     }
 
-    void setA()
+    //Žemiau pateiktos trikampių viršūnių koordinatės x1,x2,x3,y1,y2,y3
+    void setABC()
     {
-        long long x, y;
-        cin >> x >> y;
-        this->a = new Vertex(x, y);
-    }
-    void setB()
-    {
-        long long x, y;
-        cin >> x >> y;
-        this->b = new Vertex(x, y);
-    }
-    void setC()
-    {
-        long long x, y;
-        cin >> x >> y;
-        this->c = new Vertex(x, y);
+        int x1, x2, x3, y1, y2, y3;
+        cin >> x1 >> x2 >> x3 >> y1 >> y2 >> y3;
+        this->a = new Vertex(x1, y1);
+        this->c = new Vertex(x2, y2);
+        this->b = new Vertex(x3, y3);
     }
 };
 
@@ -85,27 +72,28 @@ int main()
 {
     int n = 0;
     cin >> n;
-
     list<Vertices *> vertices;
     for (int i = 0; i < n; i++)
     {
         Vertices *newVertices = new Vertices();
-        newVertices->setA();
-        newVertices->setB();
-        newVertices->setC();
+        newVertices->setABC();
         vertices.push_back(newVertices);
     }
     double totalArea = 0;
-
+    bool triangleExists = false;
     for (Vertices *vert : vertices)
     {
-
         if (vert->existTriangle())
         {
+            triangleExists = true;
             Triangle *triangle = vert->newTriangle();
             totalArea += triangle->getArea();
         }
     }
-    cout << fixed << setprecision(3) << totalArea << endl;
+    if (triangleExists)
+        cout << fixed << setprecision(3) << totalArea << endl;
+    else
+        cout << "NO";
+
     return 0;
 }
