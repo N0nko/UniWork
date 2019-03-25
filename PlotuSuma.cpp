@@ -15,7 +15,7 @@ class Vertex
 
     double getDistance(Vertex *anotherVertex)
     {
-        double distance = sqrt(pow(x - anotherVertex->x, 2) + pow(x - anotherVertex->x, 2));
+        double distance = sqrt(pow(x - anotherVertex->x, 2) + pow(y - anotherVertex->y, 2));
         return distance;
     }
 };
@@ -31,7 +31,9 @@ class Triangle
     double getArea()
     {
         double p = (ab + bc + ca) / 2;
-        return sqrt(p*(p - ab)*(p - bc)*(p - ca));
+        double area = sqrt(p * (p - ab) * (p - bc) * (p - ca));
+        // cout << ab << bc << ca << endl;
+        return area;
     }
 };
 
@@ -46,8 +48,8 @@ class Vertices
         double ab = a->getDistance(b);
         double bc = b->getDistance(c);
         double ca = c->getDistance(a);
-        
-     return (ab + bc > ca) || (ab + ca > bc) || (ca + bc > ab);
+
+        return (ab + bc > ca) || (ab + ca > bc) || (ca + bc > ab);
     }
 
     Triangle *newTriangle()
@@ -97,16 +99,13 @@ int main()
 
     for (Vertices *vert : vertices)
     {
+
         if (vert->existTriangle())
         {
             Triangle *triangle = vert->newTriangle();
-            double area = triangle->getArea();
-            if (area > 0)
-            {
-                totalArea += area;
-            }
+            totalArea += triangle->getArea();
         }
     }
-    cout << totalArea << endl;
+    cout << fixed << setprecision(3) << totalArea << endl;
     return 0;
 }
