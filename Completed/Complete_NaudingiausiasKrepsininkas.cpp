@@ -23,9 +23,11 @@ class Throws
             OnePointThrows >> OnePointScores;
     }
     // Naudingumo balai skaičiuojami sumuojant pelnytus taškus ir atimant pramestų metimų skaičių.
-    double getContribution()
+   double getContribution()
     {
-        double score = OnePointScores + 2 * TwoPointScores + 3 * ThreePointScores - OnePointThrows - TwoPointThrows - ThreePointThrows;
+        double scored = OnePointScores + 2 * TwoPointScores + 3 * ThreePointScores;
+        double missed = OnePointThrows + TwoPointThrows + ThreePointThrows - OnePointScores - TwoPointScores - ThreePointScores;
+        double score = scored - missed;
         return score;
     }
 };

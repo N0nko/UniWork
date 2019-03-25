@@ -2,52 +2,56 @@
 #include <list>
 #include <iomanip>
 #include <cmath>
-#include <fstream>
+#include <vector>
 using namespace std;
 
-class circleData
+class Circle
 {
-  public:
+private:
 	int x, y, d;
-};
 
-class circleResult
-{
-  public:
-	int circleCount;
-};
-
-class circleUtil
-{
-  public:
-	circleResult CirRes(circleData newCircle, circleResult newRes)
+public:
+	double getLengthToZero()
 	{
-		double x = newCircle.x;
-		double y = newCircle.y;
-		double d = newCircle.d;
+		return sqrt(pow(x, 2) + pow(y, 2));
+	}
+	bool checkCenter(double lengthToZero)
+	{
+		return d / 2 >= lengthToZero;
+	}
+	void setCircle()
+	{
+		cin >> x >> y >> d;
+	}
+};
 
-		double LengthToZero = pow(x, 2) + pow(y, 2);
-		LengthToZero = sqrt(LengthToZero);
+class Counter
+{
+private:
+	int circleCount = 0;
 
-		if (d / 2 >= LengthToZero)
-			newRes.circleCount++;
-
-		return newRes;
+public:
+	int countCircles(vector<Circle *> circles)
+	{
+		for (Circle *each : circles)
+		{
+			if (each->checkCenter(each->getLengthToZero()))
+				circleCount++;
+		}
+		return circleCount;
 	}
 };
 int main()
 {
 	int n;
-
 	cin >> n;
-	circleData circleDataInput;
-	circleUtil circleCalc;
-	circleResult res;
-	res.circleCount = 0;
+	Counter counter;
+	vector<Circle *> circles;
 	for (int i = 0; i < n; i++)
 	{
-		cin >> circleDataInput.x >> circleDataInput.y >> circleDataInput.d;
-		res = circleCalc.CirRes(circleDataInput, res);
+		Circle *newCircle = new Circle();
+		newCircle->setCircle();
+		circles.push_back(newCircle);
 	}
-	cout << res.circleCount;
+	cout << counter.countCircles(circles);
 }

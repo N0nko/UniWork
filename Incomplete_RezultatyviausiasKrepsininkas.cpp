@@ -34,12 +34,12 @@ class Throws
 class ContributionComparer
 {
   public:
-    double getMostUsefulValue(vector<Throws *> throws, int n)
+    double getMostUsefulValue(vector<Throws *> throws)
     {
         double highestValue = -INFINITY;
-        for (double i = 0; i < n; i++)
+        for (Throws *each: throws)
         {
-            double contributionValue = throws[i]->getContribution();
+            double contributionValue = each->getContribution();
 
             if (contributionValue > highestValue)
                 highestValue = contributionValue;
@@ -63,6 +63,6 @@ int main()
     }
     ContributionComparer comp;
 
-    cout << fixed << setprecision(2) << comp.getMostUsefulValue(throws, n);
+    cout << fixed << setprecision(2) << comp.getMostUsefulValue(throws);
     return 0;
 }
