@@ -46,8 +46,6 @@ class ContributionComparer
                 index = i;
                 highestValue = contributionValue;
             }
-            if (i == 5 || i == 12 || i == 36)
-                cout << " " << contributionValue << " " << index << " " << highestValue << endl;
         }
         return index + 1;
     }
