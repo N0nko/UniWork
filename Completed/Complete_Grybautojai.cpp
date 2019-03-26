@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -32,7 +33,8 @@ class Contestant
 class ScoreCounter
 {
   public:
-    bool checkWinnerExists(vector<Contestant *> contenders)
+    //checks if a difference in contestant scores exists
+    bool checkIfAnySumDifferenceExists(vector<Contestant *> contenders)
     {
         vector<int> contendersScore;
         for (Contestant *each : contenders)
@@ -42,7 +44,7 @@ class ScoreCounter
                 return true;
         return false;
     }
-
+    //find winner
     string getWinnersName(vector<Contestant *> contenders)
     {
         int winnerIndex;
@@ -60,25 +62,48 @@ class ScoreCounter
         }
         return contenders[winnerIndex]->getContendersName();
     }
+};
+class DupeKiller
+{
+  private:
+    vector<int> RemoveIntDuplicates(vector<int> contendersToRemove)
+    {
+        //remove duplicates from duplicate array
+        sort(contendersToRemove.begin(), contendersToRemove.end());
+        contendersToRemove.erase(unique(contendersToRemove.begin(), contendersToRemove.end()), contendersToRemove.end());
+
+        return contendersToRemove;
+    }
+
+  public:
     vector<Contestant *> RemoveDuplicates(vector<Contestant *> contenders)
     {
+        //create array where duplicates are marked
         int n = (int)contenders.size();
+        vector<int> contendersToRemove;
         for (int i = 0; i < n - 1; i++)
             for (int j = i + 1; j < n; j++)
                 if (contenders[i]->getScore() == contenders[j]->getScore())
                 {
-                    cout << "Removing: " << contenders[i]->getContendersName() << " score: " << contenders[i]->getScore() << " and " << contenders[j]->getContendersName() << " score: " << contenders[i]->getScore() << endl;
-                    contenders.erase(contenders.begin() + i);
-                    j -= 1;
-                    contenders.erase(contenders.begin() + (j));
-                    n = (int)contenders.size();
+                    contendersToRemove.push_back(i);
+                    contendersToRemove.push_back(j);
                 }
 
-        cout << "Size: " << (int)contenders.size() << endl;
-        for (Contestant *each : contenders)
-            cout << "Remaining: " << each->getContendersName() << endl;
+        contendersToRemove = RemoveIntDuplicates(contendersToRemove);
 
-        return contenders;
+        //create a new contender array where you add contenders that were not marked
+        vector<Contestant *> reformedContenders;
+        for (int i = 0; i < n; i++)
+        {
+            bool addContestant = true;
+            for (int anotherEach : contendersToRemove)
+                if (i == (int)anotherEach)
+                    addContestant = false;
+
+            if (addContestant)
+                reformedContenders.push_back(contenders[i]);
+        }
+        return reformedContenders;
     }
 };
 
@@ -94,10 +119,13 @@ int main()
         contenders.push_back(newContestant);
     }
     ScoreCounter counter;
-    if (counter.checkWinnerExists(contenders))
-        cout << counter.getWinnersName(counter.RemoveDuplicates(contenders)) << endl;
+    DupeKiller corrector;
+    contenders = corrector.RemoveDuplicates(contenders);
+
+    if (contenders.size() > 0 || counter.checkIfAnySumDifferenceExists(contenders))
+        cout << counter.getWinnersName(contenders) << endl;
     else
-        cout << "Marcinkevičius";
+        cout << "MARCINKEVIČIUS";
 
     return 0;
 }
