@@ -2,6 +2,8 @@
 #include <list>
 #include <cmath>
 #include <iomanip>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -28,11 +30,11 @@ class Triangle
   public:
     Triangle(double ab, double bc, double ca) : ab(ab), bc(bc), ca(ca) {}
 
-    double getArea()
+    bool checkIfObtuse()
     {
-        double p = (ab + bc + ca) / 2;
-        double area = sqrt(p * (p - ab) * (p - bc) * (p - ca));
-        return area;
+        vector<double> sides{ab, bc, ca};
+        sort(sides.begin(), sides.end());
+        return pow(sides[2], 2) > pow(sides[0], 2) + pow(sides[1], 2);
     }
 };
 
@@ -79,7 +81,7 @@ int main()
         newVertices->setABC();
         vertices.push_back(newVertices);
     }
-    double totalArea = 0;
+    int obtuseCount = 0;
     bool triangleExists = false;
     for (Vertices *vert : vertices)
     {
@@ -87,11 +89,12 @@ int main()
         {
             triangleExists = true;
             Triangle *triangle = vert->newTriangle();
-            totalArea += triangle->getArea();
+            if (triangle->checkIfObtuse())
+                obtuseCount++;
         }
     }
     if (triangleExists)
-        cout << fixed << setprecision(3) << totalArea << endl;
+        cout << obtuseCount << endl;
     else
         cout << "NERA";
 
