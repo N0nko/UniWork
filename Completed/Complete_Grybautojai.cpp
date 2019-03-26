@@ -112,6 +112,7 @@ int main()
     int n = 0;
     cin >> n;
     vector<Contestant *> contenders;
+    //input
     for (int i = 0; i < n; i++)
     {
         Contestant *newContestant = new Contestant();
