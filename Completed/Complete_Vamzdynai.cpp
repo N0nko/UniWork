@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include "header.h"
 using namespace std;
 
 class Pipe
@@ -12,7 +13,7 @@ class Pipe
   private:
     double length, circleRadius, hexRadius;
     //Vietoje pi naudokite 355/113.
-    const double pi = (355 / 113);
+    const double pi = double(355) / double(113);
 
   public:
     //Žinome kiekvieno vamzdžio ilgį L, vidinio apskritimo skersmenį R bei šešiakampio didžiausią galimą diametrą D.
@@ -68,13 +69,13 @@ class Printer
         for (int i = 0; i < pipes.size(); i++)
         {
             double pipeRadius = pipes[i]->getRadius();
-            if (pipeRadius < smallestRadius)
+            if (pipeRadius <= smallestRadius)
             {
                 index = i + 1;
                 smallestRadius = pipeRadius;
             }
         }
-        cout << "Pienas ilgiausiai tekės pro " << index << "vamzdį" << endl;
+        cout << "Pienas ilgiausiai tekės pro " << index << " vamzdį" << endl;
     }
 };
 int main()
