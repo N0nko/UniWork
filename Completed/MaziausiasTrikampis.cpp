@@ -1,7 +1,4 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -59,7 +56,7 @@ class Vertices
 
         return new Triangle(ab, bc, ca);
     }
-
+    //pateiktos trikampių viršūnių koordinatės x1,y1,x2,y2,x3,y3
     void setA()
     {
         long long x, y;
@@ -94,7 +91,8 @@ int main()
         vertices.push_back(newVertices);
     }
     double smallestArea = INFINITY;
-    bool triangleExists= false;
+    bool triangleExists = false;
+    //Raskite trikampį, kurio plotas būtų mažiausias
     for (Vertices *vert : vertices)
     {
         if (vert->existTriangle())

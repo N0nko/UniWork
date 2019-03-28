@@ -1,13 +1,10 @@
-#include <iostream>
-#include <list>
-#include <iomanip>
-#include <cmath>
-#include <fstream>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 class throws
 {
-  public:
+public:
 	int OnePointThrows, OnePointScores;
 	int TwoPointThrows, TwoPointScores;
 	int ThreePointThrows, ThreePointScores;
@@ -15,14 +12,15 @@ class throws
 
 class highScore
 {
-  public:
+public:
 	double ratio;
 	int score;
 };
 
 class throwsUtil
 {
-  public:
+public:
+	//Apskaičiuokite, kiek taškų pelnė taikliausias krepšininkas.
 	highScore throwCalc(throws data, highScore result)
 	{
 
@@ -42,7 +40,6 @@ class throwsUtil
 int main()
 {
 	int n;
-	//ifstream IN("data.txt");
 	throws startInput;
 	throwsUtil calc;
 	highScore result;
@@ -52,6 +49,7 @@ int main()
 
 	for (int i = 0; i < n; i++)
 	{
+		// pateikti dvitaškių (metė, pataikė), tritaškių (metė, pataikė) bei baudų metimų (metė, pataikė)
 		cin >> startInput.TwoPointThrows >> startInput.TwoPointScores >> startInput.ThreePointThrows >> startInput.ThreePointScores >> startInput.OnePointThrows >> startInput.OnePointScores;
 		result = calc.throwCalc(startInput, result);
 	}

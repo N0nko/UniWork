@@ -1,10 +1,4 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
-#include <vector>
-#include <string>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -57,7 +51,6 @@ class ScoreCounter
             {
                 biggestScore = contendersScore;
                 winnerIndex = i;
-                // cout << "BiggestScore: " << contendersScore << endl;
             }
         }
         return contenders[winnerIndex]->getContendersName();
@@ -112,7 +105,6 @@ int main()
     int n = 0;
     cin >> n;
     vector<Contestant *> contenders;
-    //input
     for (int i = 0; i < n; i++)
     {
         Contestant *newContestant = new Contestant();
@@ -121,7 +113,14 @@ int main()
     }
     ScoreCounter counter;
     DupeKiller corrector;
+
+//Varžybų laimėtoju skelbiamas daugiausiai taškų surinkęs grybautojas. 
+//Grybautojai surinkę po vienodai taškų yra diskvalifikuojami. 
+//Padėkite nustatyti varžybų laimėtoją.
+//Jeigu laimėtojo nėra, išvesti pasakos "Grybų karas" autoriaus pavardę didžiosiomis raidėmis.
+
     contenders = corrector.RemoveDuplicates(contenders);
+
 
     if (contenders.size() > 0 || counter.checkIfAnySumDifferenceExists(contenders))
         cout << counter.getWinnersName(contenders) << endl;

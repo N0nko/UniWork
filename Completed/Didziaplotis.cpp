@@ -1,10 +1,5 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
-#include <vector>
-#include <string>
-#include <algorithm>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 class Figure
@@ -26,18 +21,37 @@ class Figure
         return x * y;
     }
 };
+class Setter
+{
+  public:
+    //zinome kiekvieno stačiakampio kraštines bei elipsių pusašių ilgius.
+    Figure *Rect()
+    {
+        int x, y;
+        cin >> x >> y;
+        Figure *newfigure = new Figure(x, y);
+        return newfigure;
+    }
+    Figure *Ellipse()
+    {
+        int x, y;
+        cin >> x >> y;
+        Figure *newfigure = new Figure(x, y);
+        return newfigure;
+    }
+};
 class Getter
 {
   public:
+    //Raskite didžiausią plotą turinčią figūrą.
     double getRectMaxValue()
     {
-        double n = 0, x, y, maxValue = -INFINITY;
+        double n = 0, maxValue = -INFINITY;
+        Setter set;
         cin >> n;
         for (int i = 0; i < n; i++)
         {
-            cin >> x >> y;
-            Figure *newfigure = new Figure(x, y);
-            double rectArea = newfigure->getRectArea();
+            double rectArea = set.Rect()->getRectArea();
             if (maxValue < rectArea)
                 maxValue = rectArea;
         }
@@ -46,12 +60,11 @@ class Getter
     double getEllipseMaxValue()
     {
         double n = 0, x, y, maxValue = -INFINITY;
+        Setter set;
         cin >> n;
         for (int i = 0; i < n; i++)
         {
-            cin >> x >> y;
-            Figure *newfigure = new Figure(x, y);
-            double ellipseArea = newfigure->getEllipseArea();
+            double ellipseArea = set.Ellipse()->getEllipseArea();
             if (maxValue < ellipseArea)
                 maxValue = ellipseArea;
         }

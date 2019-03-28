@@ -1,11 +1,5 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include "header.h"
+#include <bits/stdc++.h>
+
 using namespace std;
 
 class Pipe
@@ -23,7 +17,7 @@ class Pipe
         circleRadius /= 2;
         hexRadius /= 2;
     }
-
+    //Apskaičiuokite ir išveskite kiekvieno vamzdžio tūrį (metalo tūrį)
     double getCylinderArea()
     {
         return pi * pow(circleRadius, 2);
@@ -35,16 +29,16 @@ class Pipe
 
     double getMetalCapacity()
     {
-        return getHexArea() * length - getCylinderArea() * length;
+        return getHexArea() * length - getCylinderCapacity();
     }
 
     double getArea()
     {
         return 2 * pi * circleRadius * length + 6 * hexRadius * length + 2 * (getHexArea() - getCylinderArea());
     }
-    double getRadius()
+    double getCylinderCapacity()
     {
-        return circleRadius;
+        return getCylinderArea() * length;
     }
 };
 
@@ -55,6 +49,7 @@ class Printer
     {
         cout << index << " vamzdžio tūris: " << fixed << setprecision(3) << capacity << endl;
     }
+    //bei visų vamzdžių paviršiaus plotų sumą.
     void PrintTotalArea(vector<Pipe *> pipes)
     {
         double totalArea = 0;
@@ -62,13 +57,14 @@ class Printer
             totalArea += each->getArea();
         cout << "Paviršių plotų suma yra " << fixed << setprecision(3) << totalArea << endl;
     }
+    //Taip pat raskite vamzdį, pro kurį ilgiausiai tekėtų 666 litrai pieno.
     void PrintLongestFlow(vector<Pipe *> pipes)
     {
         double smallestRadius = INFINITY;
         int index;
         for (int i = 0; i < pipes.size(); i++)
         {
-            double pipeRadius = pipes[i]->getRadius();
+            double pipeRadius = pipes[i]->getCylinderCapacity();
             if (pipeRadius <= smallestRadius)
             {
                 index = i + 1;
@@ -83,8 +79,8 @@ int main()
     int n = 0;
     cin >> n;
     vector<Pipe *> pipes;
-    //input
     Printer printer;
+
     for (int i = 0; i < n; i++)
     {
         Pipe *newPipe = new Pipe();

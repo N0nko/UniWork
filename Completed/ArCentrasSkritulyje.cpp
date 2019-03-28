@@ -1,8 +1,5 @@
-#include <iostream>
-#include <list>
-#include <iomanip>
-#include <cmath>
-#include <vector>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 class Circle
@@ -19,6 +16,7 @@ public:
 	{
 		return d / 2 >= lengthToZero;
 	}
+	//pateikta skritulio centro koordinatės x,y bei skersmuo r 
 	void setCircle()
 	{
 		cin >> x >> y >> d;
@@ -31,6 +29,7 @@ private:
 	int circleCount = 0;
 
 public:
+// Apskaičiuokite, keliems skrituliams priklauso koordinačių centro taškas (0;0).
 	int countCircles(vector<Circle *> circles)
 	{
 		for (Circle *each : circles)

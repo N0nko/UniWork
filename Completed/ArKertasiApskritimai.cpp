@@ -1,8 +1,5 @@
-#include <iostream>
-#include <list>
-#include <iomanip>
-#include <cmath>
-#include <vector>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 class Circle
@@ -41,6 +38,7 @@ class CollisionCounter
     int collisionCount = 0;
 
   public:
+  //Apskaičiuokite, keli apskritimai kertasi su apskritimu, kurio centras yra (6;6), o spindulys 6.
     int countCollisions(vector<Circle *> circles)
     {
         Circle *constCircle = new Circle(6, 6, 6);
@@ -61,6 +59,7 @@ int main()
     vector<Circle *> circles;
     for (int i = 0; i < n; i++)
     {
+        //pateikta apskritimo centro koordinatės x,y bei skersmuo r 
         double x, y, d;
         cin >> x >> y >> d;
         Circle *newCircle = new Circle(x, y, d);

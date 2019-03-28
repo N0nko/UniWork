@@ -1,9 +1,4 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
-#include <vector>
-#include <string>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -21,7 +16,7 @@ class Time
             timeSum = abs(24 * 3600 - timeSum);
         return timeSum;
     }
-
+    //duoti laikai h, min, s
     void setTime()
     {
         cin >> hh >> mm >> ss;

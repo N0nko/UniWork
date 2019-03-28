@@ -1,9 +1,4 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -59,7 +54,7 @@ class Vertices
         return new Triangle(ab, bc, ca);
     }
 
-    //Žemiau pateiktos trikampių viršūnių koordinatės x1,x2,x3,y1,y2,y3
+    //pateiktos trikampių viršūnių koordinatės x1,x2,x3,y1,y2,y3
     void setABC()
     {
         int x1, x2, x3, y1, y2, y3;
@@ -83,6 +78,7 @@ int main()
     }
     int obtuseCount = 0;
     bool triangleExists = false;
+    //Apskaičiuokite bukų trikampių kiekį.
     for (Vertices *vert : vertices)
     {
         if (vert->existTriangle())

@@ -1,7 +1,4 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -81,6 +78,7 @@ int main()
     }
     double totalArea = 0;
     bool triangleExists = false;
+    //Raskite visų egzistuojančių trikampių plotų sumą
     for (Vertices *vert : vertices)
     {
         if (vert->existTriangle())

@@ -1,10 +1,4 @@
-#include <iostream>
-#include <list>
-#include <cmath>
-#include <iomanip>
-#include <vector>
-#include <string>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -14,14 +8,14 @@ class Student
     string name;   //student name
     int grades[5]; //5 grades
   public:
-    //Žemiau pateikti dalyvių vardai ir surinktų raudonikių, baravykų bei šungrybių kiekiai
+    //Studentai privalo dekanatui pateikti ataskaitos lapuką su savo vardu ir penkiais egzaminų pažymiais.
     void setStudent()
     {
         cin >> name;
         for (int i = 0; i < 5; i++)
             cin >> grades[i];
     }
-    //Kiekvienas raudonikis vertas 5, baravykas 3, šungrybis 15 taškų.
+
     double getAverageGrade()
     {
         double average = 0;
@@ -39,6 +33,7 @@ class GradeCounter
 {
 
   public:
+  // Apskaičiuokite keli studentai gaus stipendiją, jeigu ji skiriama turintiems didesnį nei 9 vidurkį.
     int getScholarCount(vector<Student *> students)
     {
         int scholarCount = 0;
@@ -47,6 +42,7 @@ class GradeCounter
                 scholarCount++;
         return scholarCount;
     }
+    //atspausdinkite geriausiai besimokančio studento vardą.
     string getBestStudent(vector<Student *> students)
     {
         int bestID;

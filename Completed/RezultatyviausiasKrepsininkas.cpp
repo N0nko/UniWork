@@ -1,9 +1,5 @@
-#include <iostream>
-#include <list>
-#include <iomanip>
-#include <cmath>
-#include <fstream>
-#include <vector>
+#include <bits/stdc++.h>
+
 using namespace std;
 
 class Throws
@@ -16,9 +12,11 @@ class Throws
   public:
     //Žemiau pateikti dvitaškių (metė, pataikė), tritaškių (metė, pataikė) bei baudų metimų (metė, pataikė) skaičiai
     void setScores()
-    { // dvm Dvp trm Drp bdm Bdp
+    {
         cin >>
-            TwoPointThrows >> TwoPointScores >> ThreePointThrows >> ThreePointScores >> OnePointThrows >> OnePointScores;
+            TwoPointThrows >> TwoPointScores >>
+            ThreePointThrows >> ThreePointScores >>
+            OnePointThrows >> OnePointScores;
     }
     //  Apskaičiuokite daugiausiai taškų pelniusio krepšininko taiklumą.
     double getScore()
@@ -32,7 +30,7 @@ class Throws
         return score / misses * 100;
     }
 };
-
+//iesko daugiausiai tasku pelniusio zaidejo ir isveda jo taiklumo koff
 class ContributionComparer
 {
   public:
